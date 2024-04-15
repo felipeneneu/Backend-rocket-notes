@@ -3,8 +3,15 @@ const UsersController = require("../controllers/UsersController")
 
 const usersRoutes = Router();
 
+function myMiddlewere(request, response, next) {
+    console.log("voce passou pelo middlewere")
+
+    next()
+}
+
+
 const usersController = new UsersController()
 
-usersRoutes.post("/", usersController.create);
+usersRoutes.post("/", myMiddlewere, usersController.create);
 
 module.exports = usersRoutes;
