@@ -14,6 +14,8 @@ app.get("/users", (request, response) => {
     response.send(`Pagina ${page}. mostrar: ${limit}.`)
 }) */
 require("express-async-errors")
+const migrationsRun = require("./database/sqlite/migrations")
+
 const AppError = require("./utils/AppError")
 
 const express = require("express");
@@ -23,7 +25,10 @@ const routes = require("./routes")
 const app = express();
 app.use(express.json())
 
+
 app.use(routes)
+
+migrationsRun()
 
 //http://localhost:3333/users?page=10&limit=10
 
